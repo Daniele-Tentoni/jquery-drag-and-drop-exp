@@ -29,12 +29,16 @@
             <div class="list-group-item">
               <h3>Diritto Penale</h3>
               <div id="columns" class="list-group col draggable-columns">
-                <div class="list-group-item card" style="width: 18rem">
+                <div class="list-group-item card">
                   <div class="card-body">
                     <h5 class="card-title">
                       <button class="btn btn-primary">-></button>
                       &nbsp;Prima colonna
                     </h5>
+                    <p class="card-text">
+                      Questa prima colonna contiene i voti per l'esercitazione
+                      durante la prima lezione
+                    </p>
                   </div>
                 </div>
                 <div class="list-group-item card" style="width: 18rem">
@@ -100,9 +104,32 @@
         <div class="col-md">
           <h2>Elements</h2>
           <div class="list-group">
-            <div class="list-group-item draggable-elements">Primo Elemento</div>
-            <div class="list-group-item draggable-elements">
-              Secondo Elemento
+            <div class="list-group-item">
+              <h5 class="card-title">Primo Elemento</h5>
+              <h6 class="card-subtitle mb-2 text-muted">
+                This is a simple subtitle.
+              </h6>
+              <p class="card-text">
+                Each elements can contains some columns from other side.
+              </p>
+              <div
+                class="list-group col draggable-elements"
+                style="min-height: 1rem"
+              ></div>
+            </div>
+            <div class="list-group-item">
+              <h5 class="card-title">Secondo Elemento</h5>
+              <h6 class="card-subtitle mb-2 text-muted">
+                Subtitle can contain some text.
+              </h6>
+              <p class="card-text">
+                A card with a drop container must have some space ever
+                available.
+              </p>
+              <div
+                class="list-group col draggable-elements"
+                style="min-height: 1rem"
+              ></div>
             </div>
           </div>
         </div>
