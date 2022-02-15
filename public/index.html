@@ -32,7 +32,12 @@
                 <div class="list-group-item card">
                   <div class="card-body">
                     <h5 class="card-title">
-                      <button class="btn btn-primary">-></button>
+                      <button
+                        class="btn btn-primary"
+                        onclick="addElement('Prima colonna')"
+                      >
+                        ->
+                      </button>
                       &nbsp;Prima colonna
                     </h5>
                     <p class="card-text">
@@ -41,26 +46,41 @@
                     </p>
                   </div>
                 </div>
-                <div class="list-group-item card" style="width: 18rem">
+                <div class="list-group-item card">
                   <div class="card-body">
                     <h5 class="card-title">
-                      <button class="btn btn-primary">-></button>
+                      <button
+                        class="btn btn-primary"
+                        onclick="addElement('Seconda colonna')"
+                      >
+                        ->
+                      </button>
                       &nbsp;Seconda colonna
                     </h5>
                   </div>
                 </div>
-                <div class="list-group-item card" style="width: 18rem">
+                <div class="list-group-item card">
                   <div class="card-body">
                     <h5 class="card-title">
-                      <button class="btn btn-primary">-></button>
+                      <button
+                        class="btn btn-primary"
+                        onclick="addElement('Prima colonna')"
+                      >
+                        ->
+                      </button>
                       &nbsp;Terza colonna
                     </h5>
                   </div>
                 </div>
-                <div class="list-group-item card" style="width: 18rem">
+                <div class="list-group-item card">
                   <div class="card-body">
                     <h5 class="card-title">
-                      <button class="btn btn-primary">-></button>
+                      <button
+                        class="btn btn-primary"
+                        onclick="addElement('Prima colonna')"
+                      >
+                        ->
+                      </button>
                       &nbsp;Quarta colonna
                     </h5>
                   </div>
@@ -73,26 +93,41 @@
                 id="diritto-privato-columns"
                 class="list-group col draggable-columns"
               >
-                <div class="list-group-item card" style="width: 18rem">
+                <div class="list-group-item card">
                   <div class="card-body">
                     <h5 class="card-title">
-                      <button class="btn btn-primary">-></button>
+                      <button
+                        class="btn btn-primary"
+                        onclick="addElement('Prima colonna')"
+                      >
+                        ->
+                      </button>
                       &nbsp;Prima colonna
                     </h5>
                   </div>
                 </div>
-                <div class="list-group-item card" style="width: 18rem">
+                <div class="list-group-item card">
                   <div class="card-body">
                     <h5 class="card-title">
-                      <button class="btn btn-primary">-></button>
+                      <button
+                        class="btn btn-primary"
+                        onclick="addElement('Prima colonna')"
+                      >
+                        ->
+                      </button>
                       &nbsp;Seconda colonna
                     </h5>
                   </div>
                 </div>
-                <div class="list-group-item card" style="width: 18rem">
+                <div class="list-group-item card">
                   <div class="card-body">
                     <h5 class="card-title">
-                      <button class="btn btn-primary">-></button>
+                      <button
+                        class="btn btn-primary"
+                        onclick="addElement('Prima colonna')"
+                      >
+                        ->
+                      </button>
                       &nbsp;Terza colonna
                     </h5>
                   </div>
@@ -103,34 +138,8 @@
         </div>
         <div class="col-md">
           <h2>Elements</h2>
-          <div class="list-group">
-            <div class="list-group-item">
-              <h5 class="card-title">Primo Elemento</h5>
-              <h6 class="card-subtitle mb-2 text-muted">
-                This is a simple subtitle.
-              </h6>
-              <p class="card-text">
-                Each elements can contains some columns from other side.
-              </p>
-              <div
-                class="list-group col draggable-elements"
-                style="min-height: 1rem"
-              ></div>
-            </div>
-            <div class="list-group-item">
-              <h5 class="card-title">Secondo Elemento</h5>
-              <h6 class="card-subtitle mb-2 text-muted">
-                Subtitle can contain some text.
-              </h6>
-              <p class="card-text">
-                A card with a drop container must have some space ever
-                available.
-              </p>
-              <div
-                class="list-group col draggable-elements"
-                style="min-height: 1rem"
-              ></div>
-            </div>
+          <div id="elements" class="list-group">
+            <!-- This is filled on finished page load -->
           </div>
         </div>
       </div>
@@ -154,23 +163,92 @@
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
     <script>
+      const availableColumns = [];
+      const availableElements = [];
+
+      function Element(title, subtitle, text) {
+        if (typeof title !== "string") {
+          console.warning("Element title must be a string");
+          return false;
+        }
+
+        this.title = title;
+        this.subtitle = subtitle;
+        this.text = text;
+
+        this.dump = function () {
+          return `<div class="list-group-item card">
+            <h5 class="card-title">${this.title}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">${this.subtitle}</h6>
+            <p class="card-text">${this.text}</p>
+            <div
+              class="list-group col draggable-elements"
+              style="min-height: 1rem; background-color: lightblue"
+            ></div>
+          </div>`;
+        };
+      }
+
       $(function () {
-        console.log("Ready");
+        addElement(
+          new Element(
+            "Primo Elemento",
+            "This is a simple subtitle.",
+            "Each elements can contains some columns from other side."
+          )
+        );
+        addElement(
+          new Element(
+            "Secondo Elemento",
+            "Subtitle can contain some text.",
+            "A card with a drop container must have some space ever available."
+          )
+        );
+        addElement(
+          new Element(
+            "Terza colonna",
+            "Terza colonna generata automaticamente",
+            "Queste colonne sono state generate automaticamente dallo script all'apertura della pagina."
+          )
+        );
         $(".draggable-columns").sortable({
-          animation: 150,
+          animation: 150, // ms, animation speed moving items when sorting, `0` — without animation
+          // delay: 100, // time in milliseconds to define when the sorting should start
+          // delayOnTouchOnly: true, // only delay if user is using touch
           group: {
-            name: "shared",
+            name: "shared", // group name
             // put: false, // Do not allow items to be put into this list
           },
-          sort: false, // To disable sorting: set sort to false
-        });
-        $(".draggable-elements").sortable({
-          animation: 150,
-          group: "shared",
-          fallbackOnBody: true, // Enable nesting
-          swapThreshold: 0.65, // Enable nesting
+          sort: false, // sorting inside list
         });
       });
+
+      function makeElementsSortable() {
+        $(".draggable-elements").sortable({
+          animation: 150, // ms, animation speed moving items when sorting, `0` — without animation
+          group: "shared", // or { name: "...", pull: [true, false, 'clone', array], put: [true, false, array] }
+          scroll: true,
+          swapThreshold: 0.65, // Enable nesting
+        });
+      }
+
+      function addElement(element) {
+        if (!(element instanceof Element)) {
+          console.warning("Invalid element to be added");
+          return false;
+        }
+
+        const elem = availableElements.find((f) => f == element.title);
+        if (elem != null) {
+          console.log("Already added");
+          return false;
+        }
+
+        availableElements.push(element);
+        $("#elements").append(element.dump());
+        makeElementsSortable();
+        return true;
+      }
     </script>
   </body>
 </html>
